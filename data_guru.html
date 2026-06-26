@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Data Guru</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#f5f5f5;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:260px;
+            height:100vh;
+            background:#2F5D50;
+            position:fixed;
+            left:0;
+            top:0;
+            padding:30px 20px;
+        }
+
+        .sidebar h2{
+            color:white;
+            text-align:center;
+            margin-bottom:40px;
+            font-weight:700;
+        }
+
+        .menu{
+            list-style:none;
+            padding:0;
+        }
+
+        .menu li{
+            margin-bottom:15px;
+        }
+
+        .menu a{
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:15px;
+            border-radius:15px;
+            transition:0.3s;
+        }
+
+        .menu a:hover{
+            background:rgba(255,255,255,0.2);
+        }
+
+        /* MAIN */
+
+        .main{
+            margin-left:280px;
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            padding:30px;
+            border-radius:25px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom:30px;
+        }
+
+        .title{
+            font-weight:700;
+            color:#2F5D50;
+            margin-bottom:25px;
+        }
+
+        .form-control{
+            height:50px;
+            border-radius:15px;
+        }
+
+        .btn-save{
+            background:#2F5D50;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:15px;
+            margin-top:10px;
+            transition:0.3s;
+        }
+
+        .btn-save:hover{
+            background:#24473d;
+        }
+
+        .table th{
+            background:#2F5D50;
+            color:white;
+        }
+
+        .btn-delete{
+            background:red;
+            color:white;
+            border:none;
+            padding:7px 15px;
+            border-radius:10px;
+            text-decoration:none;
+        }
+
+        .btn-delete:hover{
+            background:darkred;
+        }
+
+        .badge-status{
+            background:#e8f5e9;
+            color:green;
+            padding:7px 12px;
+            border-radius:10px;
+            font-size:14px;
+        }
+
+        .top-info{
+            background:#e8f5e9;
+            border-left:5px solid #2F5D50;
+            padding:15px;
+            border-radius:15px;
+            margin-bottom:20px;
+        }
+
+        @media(max-width:768px){
+
+            .sidebar{
+                width:100%;
+                height:auto;
+                position:relative;
+            }
+
+            .main{
+                margin-left:0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>
+            📚 Absensi Guru
+        </h2>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboard">🏠 Dashboard</a>
+            </li>
+
+            <li>
+                <a href="/data-guru">👨‍🏫 Data Guru</a>
+            </li>
+
+            <li>
+                <a href="/generate-qr">📷 Generate QR</a>
+            </li>
+
+            <li>
+                <a href="/scan-absensi">✅ Scan Absensi</a>
+            </li>
+
+            <li>
+                <a href="/rekap-absensi">📋 Rekap Absensi</a>
+            </li>
+
+            <li>
+                <a href="/">🚪 Logout</a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <!-- INFO -->
+
+        <div class="top-info">
+
+            <b>INFO :</b>
+
+            Data guru akan tersimpan otomatis ke database SQLite.
+
+        </div>
+
+        <!-- FORM -->
+
+        <div class="box">
+
+            <h2 class="title">
+                Tambah Data Guru
+            </h2>
+
+            <form action="/tambah-guru" method="POST">
+
+                <div class="row">
+
+                    <!-- NAMA -->
+
+                    <div class="col-lg-4 mb-3">
+
+                        <label>Nama Guru</label>
+
+                        <input type="text"
+                               name="nama"
+                               class="form-control"
+                               placeholder="Masukkan Nama Guru"
+                               required>
+
+                    </div>
+
+                    <!-- NIP -->
+
+                    <div class="col-lg-4 mb-3">
+
+                        <label>NIP Guru</label>
+
+                        <input type="text"
+                               name="nip"
+                               class="form-control"
+                               placeholder="Masukkan NIP Guru"
+                               required>
+
+                    </div>
+
+                    <!-- MAPEL -->
+
+                    <div class="col-lg-4 mb-3">
+
+                        <label>Mata Pelajaran</label>
+
+                        <input type="text"
+                               name="mapel"
+                               class="form-control"
+                               placeholder="Contoh : Matematika"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <button type="submit"
+                        class="btn-save">
+
+                    Simpan Data Guru
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="box">
+
+            <h2 class="title">
+                Data Guru
+            </h2>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+                            <th>Nama Guru</th>
+                            <th>NIP</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Status QR</th>
+                            <th>Aksi</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {{data_guru}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
